@@ -22,7 +22,7 @@ class CommentDAO:
         return posts_data
 
     def _load_comments(self):
-        """Возвращает список элементов Comment"""
+        """Возвращает список Comment"""
 
         comments_data = self._load_data()
         list_of_posts = [Comment(**comment_data) for comment_data in comments_data]
@@ -32,7 +32,7 @@ class CommentDAO:
         return list_of_posts
 
     def get_comments_by_post_pk(self, post_pk:int) -> list[Comment]:
-        """ Получает все комментарии к определенному посту по его pk"""
+        """ Получает все комментарии к 1 посту по его pk(ноеру)"""
         comments: list[Comment] = self._load_comments()
         comments_match: list[Comment] = [c for c in comments if c.post_pk == post_pk]
         return comments_match

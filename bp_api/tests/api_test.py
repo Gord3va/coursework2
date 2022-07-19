@@ -19,14 +19,14 @@ class TestApi:
     def test_all_posts_has_correct_status(self, app_instance):
         result = app_instance.get("/api/posts", follow_redirects=True)
         # print(result.data)
-        assert result.status_code == 200, "Неправильный статус "
+        assert result.status_code == 200, "Неправильный статуус "
 
     def test_all_posts_has_correct_keys(self, app_instance):
         result = app_instance.get("/api/posts", follow_redirects=True)
         list_of_posts = result.get_json()
 
         for post in list_of_posts:
-            assert post.keys() == self.post_keys, "Неправильные ключи у полученного словаря"
+            assert post.keys() == self.post_keys, "Неправильные ключи(ключ) у полученного словаря"
 
     # 1 post
 
@@ -48,4 +48,4 @@ class TestApi:
     def test_single_post_has_correct_data(self, app_instance, pk):
         result = app_instance.get(f"/api/posts/{pk}", follow_redirects=True)
         post = result.get_json()
-        assert post["pk"] == pk, f"Неправильный pk при запросе поста {pk}"
+        assert post["pk"] == pk, f"Неправильный pk(номер поста) при запросе поста {pk}"

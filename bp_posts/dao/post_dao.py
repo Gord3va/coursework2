@@ -7,13 +7,13 @@ from exceptions.data_exceptions import DataSourceError
 
 
 class PostDAO:
-    """ Менеджер постов """
+    """ Менеджер ууу постов """
 
     def __init__(self, path):
         self.path = path
 
     def _load_data(self):
-        """ Загружает данные из JSON и возвращает список словарей """
+        """ Загружает данные из JSON файла и возвращает список словарей ([],[])"""
 
         try:
             with open(self.path, 'r', encoding='utf-8') as file:
@@ -24,23 +24,23 @@ class PostDAO:
         return posts_data
 
     def _load_posts(self):
-        """ Возвращает список  экземпляров POST """
+        """ Возвращает список  экземпляров(примеров) POST-а """
 
         posts_data = self._load_data()
         list_of_posts = [Post(**post_data) for post_data in posts_data]
         return list_of_posts
 
     def get_all(self):
-        """получаем все посты"""
+        """получает все посты"""
 
         posts = self._load_posts()
         return posts
 
     def get_by_pk(self, pk):
-        """Получает пост по его PK """
+        """Получает пост по его PK номеру """
 
         if type(pk) != int:
-            raise TypeError("pk must be an int")
+            raise TypeError("pk must be an integer")
 
         posts = self._load_posts()
         for post in posts:
@@ -48,10 +48,10 @@ class PostDAO:
                 return post
 
     def search_in_content(self, substring):
-        """ Ищет пост где есть substring"""
+        """ Ищет пост где есть substring трока"""
 
         if type(substring) != str:
-            raise TypeError("substring must be an str")
+            raise TypeError("substring must be an string")
 
         substring = substring.lower()
         posts = self._load_posts()
@@ -61,10 +61,10 @@ class PostDAO:
         return matching_posts
 
     def get_by_poster(self, user_name):
-        """ Ищет посты с определенным автором"""
+        """ Ищет посты с 1 автором"""
 
         if type(user_name) != str:
-            raise TypeError("user_name must be an str")
+            raise TypeError("user_name must be an string")
 
         user_name = user_name.lower()
         posts = self._load_posts()
